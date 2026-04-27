@@ -1,4 +1,4 @@
-# Sistema de Controle de Acesso e Chaves
+# Sistema integrado acadêmico 
 
 Este projeto é um backend desenvolvido com **FastAPI** para controle de acesso de usuários e gerenciamento de chaves em um ambiente institucional.
 
