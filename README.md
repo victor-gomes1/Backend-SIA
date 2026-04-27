@@ -136,6 +136,7 @@ Este projeto foi desenvolvido como atividade acadêmica, com foco em:
 ## 👨‍💻 Autor
 
 Victor Gomes
+
 Estudante de Análise e Desenvolvimento de Sistemas – SENAC
 
 ---
