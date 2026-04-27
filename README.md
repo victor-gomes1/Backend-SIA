@@ -1,151 +1,143 @@
 # Sistema de Controle de Acesso e Chaves
 
-Este projeto foi desenvolvido como atividade acadêmica com o objetivo de criar um sistema backend para controle de acesso e gerenciamento de chaves físicas.
+Este projeto é um backend desenvolvido com **FastAPI** para controle de acesso de usuários e gerenciamento de chaves em um ambiente institucional (como faculdade ou empresa).
+
+O sistema permite:
+
+* Autenticação de usuários 🔐
+* Validação de acesso via QR Code 📱
+* Registro de entradas 🚪
+* Controle de retirada e devolução de chaves 🔑
+* Consulta de histórico 📊
 
 ---
 
-## 📌 Tecnologias Utilizadas
+## 🧱 Arquitetura do Projeto
 
-* Python
-* FastAPI
-* Uvicorn
-* PostgreSQL
-* Supabase
-* DBeaver
+O backend foi estruturado de forma **modular**, separando as responsabilidades em diferentes arquivos dentro da pasta `routes`.
 
----
+Cada módulo representa uma área do sistema:
 
-## 🎯 Funcionalidades
+* **auth.py** → autenticação de usuários
+* **acessos.py** → controle de entrada via QR Code
+* **chaves.py** → gerenciamento de chaves
+* **usuarios.py** → listagem de usuários
 
-### 🔐 Autenticação
-
-* Login de usuários com email e senha
-
-### 📱 Controle de Acesso
-
-* Validação de acesso via QR Code
-* Registro de entradas (logs de acesso)
-
-### 🔑 Controle de Chaves
-
-* Retirada de chaves
-* Bloqueio de uso enquanto a chave está em posse de alguém
-* Devolução de chaves
-* Liberação automática após devolução
-
-### 📋 Histórico
-
-* Registro completo de uso das chaves
-* Consulta de quem utilizou, quando retirou e devolveu
+Essa abordagem melhora a organização, manutenção e escalabilidade do sistema.
 
 ---
 
-## ⚙️ Como executar o projeto
+## 📁 Estrutura do Projeto
 
-### 1. Clonar o repositório
-
-```bash
-git clone https://github.com/seu-usuario/seu-repositorio.git
+```
+backend/
+│
+├── main.py
+├── database.py
+│
+└── routes/
+    ├── auth.py
+    ├── acessos.py
+    ├── chaves.py
+    └── usuarios.py
 ```
 
-### 2. Acessar a pasta
+---
 
-```bash
-cd seu-repositorio
-```
+## ⚙️ Tecnologias Utilizadas
 
-### 3. Instalar dependências
+* Python 🐍
+* FastAPI ⚡
+* PostgreSQL 🐘
+* SQLAlchemy 🧱
+
+---
+
+## 🚀 Como executar o projeto
+
+1. Clone o repositório
+2. Instale as dependências:
 
 ```bash
 pip install fastapi uvicorn sqlalchemy psycopg2-binary
 ```
 
-### 4. Configurar conexão com banco
+3. Configure a conexão com o banco de dados no arquivo `database.py`
 
-A conexão com o banco de dados é realizada utilizando PostgreSQL (via Supabase).
-
-Para executar o projeto, configure as variáveis de ambiente com os dados da sua conexão:
-
-- Host
-- Porta
-- Usuário
-- Senha
-- Nome do banco
-
----
-
-### 5. Rodar o servidor
+4. Execute o servidor:
 
 ```bash
 python -m uvicorn main:app --reload
 ```
 
----
+5. Acesse a documentação automática (Swagger):
 
-### 6. Acessar documentação da API
-
-```plaintext
+```
 http://127.0.0.1:8000/docs
 ```
 
 ---
 
-## 🧪 Principais Rotas
+## 📌 Endpoints da API
 
-### 🔐 Login
+### 🔐 Autenticação
 
-`POST /login`
-
----
-
-### 👥 Usuários
-
-`GET /usuarios`
+* `POST /auth/login` → Realiza login do usuário
 
 ---
 
-### 📱 QR Code
+### 📱 Acessos
 
-`POST /validar-qr`
-
----
-
-### 🚪 Registro de Acesso
-
-`POST /registrar-acesso`
+* `POST /acessos/validar-qr` → Valida QR Code
+* `POST /acessos/registrar-acesso` → Registra entrada
 
 ---
 
 ### 🔑 Chaves
 
-* `POST /retirar-chave`
-* `POST /devolver-chave`
+* `POST /chaves/retirar-chave` → Retirar chave
+* `POST /chaves/devolver-chave` → Devolver chave
+* `GET /chaves/historico-chave/{chave_id}` → Histórico da chave
 
 ---
 
-### 📋 Histórico
+### 👥 Usuários
 
-`GET /historico-chave/{chave_id}`
+* `GET /usuarios/` → Listar usuários
 
 ---
 
-## 🧠 Descrição do Projeto
+## 🧠 Regras de Negócio
 
-O sistema foi projetado para simular um ambiente real de controle de acesso em instituições, permitindo:
+* Apenas usuários com status **"Ativo"** podem acessar o sistema
+* Uma chave só pode ser retirada se estiver **disponível**
+* A devolução só ocorre se houver uma retirada em aberto
+* Todas as ações são registradas para controle e histórico
 
-* Gerenciamento de usuários
-* Controle de entrada e saída
-* Monitoramento de recursos físicos (chaves)
-* Registro de todas as ações realizadas
+---
+
+## 🔐 Segurança
+
+As senhas estão armazenadas em formato simples apenas para fins acadêmicos.
+
+---
+
+## 🎯 Objetivo do Projeto
+
+Este projeto foi desenvolvido como atividade acadêmica, com foco em:
+
+* Prática de desenvolvimento backend
+* Organização de código (boas práticas)
+* Integração com banco de dados
+* Simulação de um sistema real de controle
 
 ---
 
 ## 👨‍💻 Autor
 
 Victor Gomes
+Estudante de Análise e Desenvolvimento de Sistemas – SENAC
 
 ---
 
-## 📌 Observação
 
-Este projeto tem fins acadêmicos e utiliza dados fictícios.
