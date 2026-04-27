@@ -1,6 +1,6 @@
 # Sistema de Controle de Acesso e Chaves
 
-Este projeto é um backend desenvolvido com **FastAPI** para controle de acesso de usuários e gerenciamento de chaves em um ambiente institucional (como faculdade ou empresa).
+Este projeto é um backend desenvolvido com **FastAPI** para controle de acesso de usuários e gerenciamento de chaves em um ambiente institucional.
 
 O sistema permite:
 
